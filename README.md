@@ -11,6 +11,15 @@
 
 本專案使用去識別化模擬資料，適合公開部署與展示，不包含正式員工或客戶資料。
 
+## 適合部署的平台
+
+此 repo 已整理成可直接部署到 Streamlit Community Cloud 的版本：
+
+- 啟動檔：`demo_app.py`
+- 相依套件：`requirements.txt`
+- Streamlit 設定：`.streamlit/config.toml`
+- 不需要資料庫、API key 或額外後端服務
+
 ## 本機執行
 
 ```bash
@@ -29,4 +38,4 @@ python -m venv .venv
 
 ## 部署
 
-部署方式請參考 [DEPLOYMENT.md](C:\Users\fordi\Documents\Codex\route-audit-demo\DEPLOYMENT.md)。
+部署方式請參考 [DEPLOYMENT.md](./DEPLOYMENT.md)。

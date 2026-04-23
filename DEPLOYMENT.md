@@ -17,18 +17,36 @@
 3. 建立新 app。
 4. Repository 指向這個 repo。
 5. Main file path 設定為 `demo_app.py`。
-6. Deploy。
+6. Python version 選 `3.13`。
+7. Deploy。
 
 ## 建議設定
 
 - Python 版本：`3.13`
 - Main file：`demo_app.py`
+- Branch：`main`
+- App visibility：依你的公開需求選擇 Public 或 Unlisted
 
 ## 上線前檢查
 
 - `demo_app.py` 可在本機正常執行
 - `requirements.txt` 僅保留 demo 所需依賴
+- `.streamlit/config.toml` 已存在
 - 專案內不含真實客戶或員工資料
+
+## 此 repo 已包含
+
+- `demo_app.py`：Streamlit 入口
+- `demo_data.py`：模擬資料
+- `requirements.txt`：最小部署依賴
+- `.streamlit/config.toml`：Streamlit Cloud 友善設定
+- `README.md`：專案介紹
+
+## 建議上線名稱
+
+- `Route Audit Demo`
+- `HR Route Audit Demo`
+- `Field Visit Audit Demo`
 
 ## 公開頁介紹短文
 
