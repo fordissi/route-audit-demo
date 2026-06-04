@@ -1,26 +1,37 @@
 # Route Audit Demo
 
-這是一個以外勤管理為場景的 HR analytics 展示專案。
+Standalone Streamlit demo for the Function Route Report / Route Audit concept.
 
-系統將 GPS 打卡、醫療院所 open data、既有客戶資料與 Route API 的概念整合為一個可視化展示頁，協助主管快速理解：
+This repository is the lightweight public demo app used for Streamlit Community Cloud deployment. It does not contain the full production pipeline or private HR source data. The demo uses synthetic monthly data to explain how GPS check-ins, public medical facility context, route estimation, mileage claims, and audit signals can be reviewed together.
 
-- 外勤拜訪脈絡
-- 公務里程合理性
-- HR 與財務需要複核的異常訊號
-- 導入後的管理價值與產品成熟度
+## Demo Scope
 
-本專案使用去識別化模擬資料，適合公開部署與展示，不包含正式員工或客戶資料。
+The current demo story covers four months of synthetic activity:
 
-## 適合部署的平台
+- `2026-02` to `2026-05`
+- A001: north Taiwan hospital sales route
+- B001: south Taiwan hospital sales route
+- C001: north Taiwan clinic and pharmacy route
+- D001: central Taiwan mixed channel route
 
-此 repo 已整理成可直接部署到 Streamlit Community Cloud 的版本：
+The goal is to show trend-based audit review, not only a single-day map. For example, the demo highlights how a south-region employee's claimed mileage can drift upward over several months, and how a clinic/pharmacy route can repeatedly trigger near-home check-in review signals.
 
-- 啟動檔：`demo_app.py`
-- 相依套件：`requirements.txt`
-- Streamlit 設定：`.streamlit/config.toml`
-- 不需要資料庫、API key 或額外後端服務
+## App Pages
 
-## 本機執行
+- **全業務趨勢**: Monthly claimed mileage, estimated mileage, variance, and risk-day ranking.
+- **展示角色**: A/B/C/D route personas and their territory/customer type differences.
+- **單日路徑**: Map-based route sequence for selected demo employees.
+- **稽核說明**: How mileage variance, near-home check-ins, and normal baseline behavior are interpreted.
+
+## Files
+
+- `demo_app.py`: Streamlit UI and charts.
+- `demo_data.py`: Synthetic demo dataset builder.
+- `requirements.txt`: Runtime dependencies for Streamlit Cloud.
+- `.streamlit/config.toml`: Streamlit display/runtime configuration.
+- `DEPLOYMENT.md`: Deployment notes.
+
+## Run Locally
 
 ```bash
 python -m venv .venv
@@ -28,14 +39,26 @@ python -m venv .venv
 .venv\Scripts\python.exe -m streamlit run demo_app.py
 ```
 
-## 首頁介紹文字
+On macOS/Linux:
 
-可直接放在 GitHub repo 或部署首頁：
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+streamlit run demo_app.py
+```
 
-> 把人工查核，變成可複核的管理流程。
->
-> 這個展示版聚焦在三件事：還原外勤拜訪脈絡、拆解公務里程、整理 HR 與財務異常訊號，讓主管可以更快判讀單日案例與月度差異。
+## Deployment
 
-## 部署
+This repository is intended to deploy directly on Streamlit Community Cloud:
 
-部署方式請參考 [DEPLOYMENT.md](./DEPLOYMENT.md)。
+- Repository: `fordissi/route-audit-demo`
+- Branch: `main`
+- Main file path: `demo_app.py`
+- Python: compatible with the Streamlit Cloud default runtime
+
+No API keys or private credentials are required for this standalone demo.
+
+## Relationship To The Production Repo
+
+The full working project lives separately in the production repository. This demo repo is intentionally smaller and self-contained, so public deployment stays simple and safe. When the production project gains new report concepts, the demo can be updated here by translating those concepts into synthetic, non-private examples.
