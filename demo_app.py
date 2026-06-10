@@ -241,7 +241,7 @@ st.markdown(
         <div class="eyebrow">Function Route Report · HR Portfolio Demo</div>
         <h1>給 HR 看的外勤稽核作品集</h1>
         <p>
-            這是一個面向 HR 與人資稽核的履歷展示專案：把外勤員工的 GPS 打卡、拜訪點位與車資申報
+            履歷展示專案非正式版：把外勤員工的 GPS 打卡、拜訪點位與車資申報
             轉成可追查的風險排序。HR 團隊可以先看誰需要優先覆核、為什麼被標記、下一步要問什麼，
             不必只靠人工抽查或單日異常判斷。
         </p>
@@ -317,7 +317,7 @@ with tab_command:
         )
         st.plotly_chart(plotly_theme(source_fig, 430), width="stretch")
 
-    st.markdown('<div class="eyebrow">HR 履歷展示重點：本月優先故事線</div>', unsafe_allow_html=True)
+    st.markdown('<div class="eyebrow">展示重點：本月優先故事線</div>', unsafe_allow_html=True)
     cols = st.columns(3)
     ordered = employees.set_index("employee").loc[["B001 陳南院", "C001 張北診", "A001 林北醫"]].reset_index()
     tones = ["danger", "warn", "calm"]
@@ -514,7 +514,7 @@ with tab_talk:
                 <strong>風險模型：</strong>將申報落差、住家附近打卡、工時不足等訊號轉成異常風險分，再加上開發/覆核分形成綜合優先分。
             </p>
             <p class="muted">
-                <strong>互動展示：</strong>以 Streamlit 和 Plotly 製作 HR 可操作的作品集 demo，包含象限圖、趨勢圖、地圖路徑與稽核訪談話術。
+                <strong>互動展示：</strong>以 Streamlit 和 Plotly 製作可操作的作品集 demo，包含象限圖、趨勢圖、地圖路徑與稽核訪談話術。
             </p>
         </div>
         """,
