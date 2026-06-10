@@ -189,8 +189,8 @@ def build_demo_bundle() -> DemoBundle:
     kpis = pd.DataFrame(
         [
             {"label": "展示月份", "value": "2026-05", "note": "四個月趨勢收斂到本月"},
-            {"label": "待追查員工", "value": "2 人", "note": "B001 與 C001 優先排查"},
-            {"label": "申報差異", "value": f"{int(latest['variance_km'].sum())} km", "note": "claimed - estimated"},
+            {"label": "優先覆核員工", "value": "2 人", "note": "B001 與 C001 優先排查"},
+            {"label": "本月申報差異", "value": f"{int(latest['variance_km'].sum())} km", "note": "申報里程 - 推估里程"},
             {"label": "最高優先分", "value": f"{int(highest['priority_score'])}", "note": highest["employee"]},
         ]
     )

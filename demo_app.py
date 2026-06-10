@@ -74,6 +74,27 @@ st.markdown(
         font-size: .86rem;
         font-weight: 700;
     }
+    .resume-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: .75rem;
+        margin-top: 1rem;
+    }
+    .resume-note {
+        border: 1px solid rgba(148, 163, 184, .22);
+        border-radius: 8px;
+        background: rgba(15, 23, 42, .62);
+        padding: .8rem .9rem;
+    }
+    .resume-note strong {
+        color: #fff7ed !important;
+        display: block;
+        margin-bottom: .25rem;
+    }
+    .resume-note span {
+        color: #cbd5e1 !important;
+        line-height: 1.5;
+    }
     div[data-testid="stMetric"] {
         border: 1px solid rgba(148, 163, 184, .22);
         border-radius: 8px;
@@ -92,17 +113,33 @@ st.markdown(
         color: #2dd4bf !important;
     }
     .stTabs [data-baseweb="tab-list"] {
-        gap: .35rem;
-        border-bottom: 1px solid rgba(148, 163, 184, .18);
+        gap: .65rem;
+        border: 1px solid rgba(148, 163, 184, .26);
+        border-radius: 8px;
+        padding: .55rem;
+        background: rgba(15, 23, 42, .78);
+        margin-top: .8rem;
+        margin-bottom: 1rem;
     }
     .stTabs [data-baseweb="tab"] {
-        color: #cbd5e1;
-        border-radius: 8px 8px 0 0;
-        padding: .55rem .85rem;
+        color: #f8fafc;
+        border: 1px solid rgba(148, 163, 184, .28);
+        background: rgba(30, 41, 59, .86);
+        border-radius: 8px;
+        padding: .78rem 1rem;
+        min-height: 3rem;
+        font-weight: 850;
+        box-shadow: inset 0 -2px 0 rgba(148, 163, 184, .16);
     }
     .stTabs [aria-selected="true"] {
-        background: rgba(240, 180, 91, .14);
+        background: linear-gradient(135deg, rgba(240, 180, 91, .34), rgba(45, 212, 191, .16));
+        border-color: rgba(240, 180, 91, .72);
         color: #fff7ed !important;
+        box-shadow: 0 10px 22px rgba(0, 0, 0, .22), inset 0 -3px 0 #f0b45b;
+    }
+    .stTabs [data-baseweb="tab"]:hover {
+        border-color: rgba(45, 212, 191, .62);
+        background: rgba(45, 212, 191, .12);
     }
     .panel {
         border: 1px solid rgba(148, 163, 184, .2);
@@ -144,6 +181,17 @@ st.markdown(
     div[data-testid="stDataFrame"] {
         border-radius: 8px;
         overflow: hidden;
+    }
+    @media (max-width: 900px) {
+        .resume-grid {
+            grid-template-columns: 1fr;
+        }
+        .stTabs [data-baseweb="tab-list"] {
+            gap: .4rem;
+        }
+        .stTabs [data-baseweb="tab"] {
+            padding: .65rem .72rem;
+        }
     }
     </style>
     """,
@@ -190,18 +238,32 @@ route_events = bundle.route_events.copy()
 st.markdown(
     """
     <section class="command-hero">
-        <div class="eyebrow">Function Route Report · Streamlit Demo</div>
-        <h1>外勤路徑稽核指揮中心</h1>
+        <div class="eyebrow">Function Route Report · HR Portfolio Demo</div>
+        <h1>給 HR 看的外勤稽核作品集</h1>
         <p>
-            這版 demo 把正式版近期更新的「異常風險分、開發/覆核分、綜合優先分」拉到第一屏，
-            用四個月 mock data 呈現趨勢掌握：A 跑北部醫院作為正常基準，B 跑南部醫院出現申報漂移，
-            C 跑北部診所藥局但出勤佐證偏弱，D 作為中區觀察樣本。
+            這是一個面向 HR 與人資稽核的履歷展示專案：把外勤員工的 GPS 打卡、拜訪點位與車資申報
+            轉成可追查的風險排序。HR 團隊可以先看誰需要優先覆核、為什麼被標記、下一步要問什麼，
+            不必只靠人工抽查或單日異常判斷。
         </p>
         <div class="signal-row">
-            <span class="signal">風險象限</span>
-            <span class="signal">四個月趨勢</span>
-            <span class="signal">公開醫療機構情境</span>
-            <span class="signal">稽核話術</span>
+            <span class="signal">HR 團隊常見痛點</span>
+            <span class="signal">風險優先排序</span>
+            <span class="signal">四個月趨勢追蹤</span>
+            <span class="signal">關鍵技術說明</span>
+        </div>
+        <div class="resume-grid">
+            <div class="resume-note">
+                <strong>要解決的問題</strong>
+                <span>外勤申報、GPS 打卡與拜訪紀錄分散，HR 很難快速判斷哪些案件值得優先追查。</span>
+            </div>
+            <div class="resume-note">
+                <strong>HR 可以怎麼用</strong>
+                <span>先看風險分與趨勢，再用路徑和話術準備員工訪談與主管覆核。</span>
+            </div>
+            <div class="resume-note">
+                <strong>關鍵技術</strong>
+                <span>Python / Streamlit / Pandas / Plotly，搭配路徑推估、風險分層與互動式資料視覺化。</span>
+            </div>
         </div>
     </section>
     """,
@@ -213,7 +275,7 @@ for col, row in zip(metric_cols, bundle.kpis.to_dict("records")):
     col.metric(row["label"], row["value"], row["note"])
 
 tab_command, tab_quadrant, tab_trend, tab_route, tab_talk = st.tabs(
-    ["指揮中心", "風險象限", "月趨勢", "單日路徑", "稽核話術"]
+    ["01 問題總覽", "02 風險排序", "03 趨勢證據", "04 路徑檢視", "05 技術與話術"]
 )
 
 with tab_command:
@@ -255,7 +317,7 @@ with tab_command:
         )
         st.plotly_chart(plotly_theme(source_fig, 430), width="stretch")
 
-    st.markdown('<div class="eyebrow">本月優先故事線</div>', unsafe_allow_html=True)
+    st.markdown('<div class="eyebrow">HR 履歷展示重點：本月優先故事線</div>', unsafe_allow_html=True)
     cols = st.columns(3)
     ordered = employees.set_index("employee").loc[["B001 陳南院", "C001 張北診", "A001 林北醫"]].reset_index()
     tones = ["danger", "warn", "calm"]
@@ -264,7 +326,7 @@ with tab_command:
             story_card(row.to_dict(), tone)
 
 with tab_quadrant:
-    st.markdown("### 2026-05 風險優先排序")
+    st.markdown("### 2026-05 風險優先排序：讓 HR 先處理最值得追查的案件")
     sorted_quadrant = quadrant.sort_values("priority_score", ascending=False)
     rank_fig = px.bar(
         sorted_quadrant,
@@ -305,7 +367,7 @@ with tab_quadrant:
     )
 
 with tab_trend:
-    st.markdown("### 四個月趨勢：差異不是一天長出來的")
+    st.markdown("### 四個月趨勢：避免只看單日異常造成誤判")
     left, right = st.columns([1.1, 1.0])
     with left:
         variance_fig = px.line(
@@ -356,7 +418,7 @@ with tab_trend:
     )
 
 with tab_route:
-    st.markdown("### 單日路徑：用真實情境看訊號")
+    st.markdown("### 單日路徑：把抽象分數轉成 HR 可追問的事實")
     selected_employee = st.selectbox(
         "選擇展示角色",
         options=route_events["employee"].drop_duplicates().tolist(),
@@ -440,6 +502,23 @@ with tab_talk:
         bundle.risk_cases.rename(columns={"case": "案例", "employee": "業務", "signal": "系統訊號", "action": "建議處置"}),
         width="stretch",
         hide_index=True,
+    )
+    st.markdown("### 關鍵技術")
+    st.markdown(
+        """
+        <div class="panel">
+            <p class="muted">
+                <strong>資料處理：</strong>使用 Pandas 整理外勤打卡、拜訪點位、推估里程與申報里程，建立可比較的月趨勢資料。
+            </p>
+            <p class="muted">
+                <strong>風險模型：</strong>將申報落差、住家附近打卡、工時不足等訊號轉成異常風險分，再加上開發/覆核分形成綜合優先分。
+            </p>
+            <p class="muted">
+                <strong>互動展示：</strong>以 Streamlit 和 Plotly 製作 HR 可操作的作品集 demo，包含象限圖、趨勢圖、地圖路徑與稽核訪談話術。
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
 
 st.caption("Demo data is synthetic and designed for Streamlit deployment review. 醫療機構情境採公開資料整理後抽象化模擬。")
