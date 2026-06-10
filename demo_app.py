@@ -48,7 +48,7 @@ st.markdown(
         margin: .2rem 0 .45rem 0;
     }
     .command-hero p {
-        color: #cbd5e1 !important;
+        color: #e2e8f0 !important;
         max-width: 920px;
         line-height: 1.65;
         margin: 0;
@@ -66,9 +66,9 @@ st.markdown(
         margin-top: .9rem;
     }
     .signal {
-        border: 1px solid rgba(203, 213, 225, .18);
-        background: rgba(15, 23, 42, .58);
-        color: #e5e7eb !important;
+        border: 1px solid rgba(226, 232, 240, .32);
+        background: rgba(30, 41, 59, .92);
+        color: #f8fafc !important;
         border-radius: 999px;
         padding: .28rem .72rem;
         font-size: .86rem;
@@ -81,9 +81,9 @@ st.markdown(
         margin-top: 1rem;
     }
     .resume-note {
-        border: 1px solid rgba(148, 163, 184, .22);
+        border: 1px solid rgba(203, 213, 225, .3);
         border-radius: 8px;
-        background: rgba(15, 23, 42, .62);
+        background: rgba(15, 23, 42, .82);
         padding: .8rem .9rem;
     }
     .resume-note strong {
@@ -92,18 +92,18 @@ st.markdown(
         margin-bottom: .25rem;
     }
     .resume-note span {
-        color: #cbd5e1 !important;
+        color: #f1f5f9 !important;
         line-height: 1.5;
     }
     div[data-testid="stMetric"] {
-        border: 1px solid rgba(148, 163, 184, .22);
+        border: 1px solid rgba(203, 213, 225, .3);
         border-radius: 8px;
-        background: rgba(24, 33, 48, .86);
+        background: rgba(24, 33, 48, .96);
         padding: .82rem .9rem;
         min-height: 106px;
     }
     [data-testid="stMetricLabel"] p {
-        color: #94a3b8 !important;
+        color: #dbeafe !important;
         font-weight: 700;
     }
     [data-testid="stMetricValue"] {
@@ -114,22 +114,22 @@ st.markdown(
     }
     .stTabs [data-baseweb="tab-list"] {
         gap: .65rem;
-        border: 1px solid rgba(148, 163, 184, .26);
+        border: 1px solid rgba(203, 213, 225, .34);
         border-radius: 8px;
         padding: .55rem;
-        background: rgba(15, 23, 42, .78);
+        background: rgba(15, 23, 42, .92);
         margin-top: .8rem;
         margin-bottom: 1rem;
     }
     .stTabs [data-baseweb="tab"] {
-        color: #f8fafc;
-        border: 1px solid rgba(148, 163, 184, .28);
-        background: rgba(30, 41, 59, .86);
+        color: #ffffff;
+        border: 1px solid rgba(203, 213, 225, .46);
+        background: #263244;
         border-radius: 8px;
         padding: .78rem 1rem;
         min-height: 3rem;
         font-weight: 850;
-        box-shadow: inset 0 -2px 0 rgba(148, 163, 184, .16);
+        box-shadow: inset 0 -2px 0 rgba(203, 213, 225, .18);
     }
     .stTabs [aria-selected="true"] {
         background: linear-gradient(135deg, rgba(240, 180, 91, .34), rgba(45, 212, 191, .16));
@@ -142,16 +142,16 @@ st.markdown(
         background: rgba(45, 212, 191, .12);
     }
     .panel {
-        border: 1px solid rgba(148, 163, 184, .2);
+        border: 1px solid rgba(203, 213, 225, .28);
         border-radius: 8px;
-        background: rgba(24, 33, 48, .82);
+        background: rgba(24, 33, 48, .94);
         padding: 1rem;
         margin-bottom: .85rem;
     }
     .story-card {
-        border: 1px solid rgba(148, 163, 184, .22);
+        border: 1px solid rgba(203, 213, 225, .3);
         border-radius: 8px;
-        background: rgba(17, 24, 39, .84);
+        background: rgba(17, 24, 39, .94);
         padding: 1rem;
         min-height: 188px;
         margin-bottom: .8rem;
@@ -162,7 +162,7 @@ st.markdown(
         margin: .25rem 0 .45rem 0;
     }
     .story-card p, .muted {
-        color: #cbd5e1 !important;
+        color: #f1f5f9 !important;
         line-height: 1.58;
     }
     .danger { border-left: 4px solid #f87171; }
@@ -203,14 +203,35 @@ def plotly_theme(fig: go.Figure, height: int = 390) -> go.Figure:
     fig.update_layout(
         template="plotly_dark",
         paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(17,24,39,.55)",
-        font=dict(color="#e5e7eb"),
+        plot_bgcolor="rgba(15,23,42,.86)",
+        font=dict(color="#f8fafc", size=14),
         height=height,
         margin=dict(l=24, r=18, t=34, b=24),
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0),
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="left",
+            x=0,
+            font=dict(color="#f8fafc", size=14),
+            title_font=dict(color="#f8fafc", size=14),
+            bgcolor="rgba(15,23,42,.72)",
+        ),
+        hoverlabel=dict(bgcolor="#0f172a", bordercolor="#f0b45b", font=dict(color="#ffffff", size=13)),
     )
-    fig.update_xaxes(gridcolor="rgba(148,163,184,.16)", zerolinecolor="rgba(148,163,184,.22)")
-    fig.update_yaxes(gridcolor="rgba(148,163,184,.16)", zerolinecolor="rgba(148,163,184,.22)")
+    fig.update_xaxes(
+        gridcolor="rgba(203,213,225,.22)",
+        zerolinecolor="rgba(203,213,225,.32)",
+        title_font=dict(color="#dbeafe", size=15),
+        tickfont=dict(color="#cbd5e1", size=13),
+    )
+    fig.update_yaxes(
+        gridcolor="rgba(203,213,225,.22)",
+        zerolinecolor="rgba(203,213,225,.32)",
+        title_font=dict(color="#dbeafe", size=15),
+        tickfont=dict(color="#cbd5e1", size=13),
+    )
+    fig.update_traces(textfont=dict(color="#ffffff", size=13))
     return fig
 
 
