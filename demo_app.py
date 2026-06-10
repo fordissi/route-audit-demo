@@ -260,7 +260,7 @@ st.markdown(
     """
     <section class="command-hero">
         <div class="eyebrow">Function Route Report · HR Portfolio Demo</div>
-        <h1>給 HR 看的外勤稽核作品集</h1>
+        <h1>外勤GPS打卡稽核應用</h1>
         <p>
             履歷展示專案非正式版：把外勤員工的 GPS 打卡(104企業大師匯出)、拜訪點位與車資申報
             轉成可追查的風險排序。HR 團隊可以先看誰需要優先覆核、為什麼被標記、下一步要問什麼，
